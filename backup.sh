@@ -1,28 +1,28 @@
 #!/bin/bash
 
-# Що бекапимо (можна передати як аргумент: ./backup.sh /шлях)
+# Source folder (can be passed as argument: ./backup.sh /path)
 SOURCE="${1:-$HOME/Documents}"
 
-# Куди зберігаємо
+# Destination folder
 DEST="$HOME/backups"
 
-# Лог файл
+# Log file
 LOG="$DEST/backup.log"
 
-# Назва архіву з датою
+# Archive name with timestamp
 DATE=$(date +%Y-%m-%d_%H-%M)
 FILENAME="backup_$DATE.tar.gz"
 
-# Створюємо папку якщо нема
+# Create destination folder if not exists
 mkdir -p "$DEST"
 
-# Робимо архів
+# Create archive
 tar -czf "$DEST/$FILENAME" "$SOURCE" 2>/dev/null
 
-# Записуємо в лог
+# Write to log
 echo "[$DATE] Backup: $SOURCE -> $DEST/$FILENAME" >> "$LOG"
 echo "✅ Backup saved: $DEST/$FILENAME"
 
-# Видаляємо бекапи старше 7 днів
+# Delete backups older than 7 days
 find "$DEST" -name "*.tar.gz" -mtime +7 -delete
-echo "🧹 Old backup cleaned up"
+echo "🧹 Old backups cleaned up"
