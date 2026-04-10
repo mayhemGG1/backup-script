@@ -20,9 +20,9 @@ mkdir -p "$DEST"
 tar -czf "$DEST/$FILENAME" "$SOURCE" 2>/dev/null
 
 # Записуємо в лог
-echo "[$DATE] Бекап: $SOURCE -> $DEST/$FILENAME" >> "$LOG"
-echo "✅ Бекап збережено: $DEST/$FILENAME"
+echo "[$DATE] Backup: $SOURCE -> $DEST/$FILENAME" >> "$LOG"
+echo "✅ Backup saved: $DEST/$FILENAME"
 
 # Видаляємо бекапи старше 7 днів
 find "$DEST" -name "*.tar.gz" -mtime +7 -delete
-echo "🧹 Старі бекапи очищено"
+echo "🧹 Old backup cleaned up"
